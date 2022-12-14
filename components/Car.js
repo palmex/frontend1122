@@ -12,7 +12,10 @@ export default class Car extends React.Component{
             buttonTitle:"Hello!",
             buttonBool: true,
             buttonColor: this.props.buttonColor,
-            make: ""
+            make: "",
+            model: "",
+            year: "",
+            odometer: ""
         }
     }
 
@@ -34,13 +37,15 @@ export default class Car extends React.Component{
         console.log(this.state.buttonBool)
     }
 
-    createNewCar = () => {}
+    createNewCar = () => {
+        console.log("Car Component (internal) state: " , this.state)
+    }
 
     
     
     // 3. Part of code that is shown to user
     render(){
-        console.log("make state: " , this.state.make)
+        
 
         return(<View style={styles.container}>
 
@@ -55,6 +60,21 @@ export default class Car extends React.Component{
                 <Text> Make </Text>
                  <TextInput style={styles.input}
                  onChangeText={(e) => this.setState({make: e})}
+                 ></TextInput>
+
+                <Text> Model </Text>
+                 <TextInput style={styles.input}
+                 onChangeText={(e) => this.setState({model: e})}
+                 ></TextInput>
+
+                <Text> Year </Text>
+                 <TextInput style={styles.input}
+                 onChangeText={(e) => this.setState({year: e})}
+                 ></TextInput>
+
+                <Text> Odometer </Text>
+                 <TextInput style={styles.input}
+                 onChangeText={(e) => this.setState({odometer: e})}
                  ></TextInput>
 
                  <Button title={"Submit"}
