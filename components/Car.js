@@ -1,5 +1,6 @@
 import { StyleSheet, Text, Button, View } from 'react-native';
 import React from "react";
+// import specialFucntion from anotherComponet
 
 
 export default class Car extends React.Component{
@@ -8,7 +9,9 @@ export default class Car extends React.Component{
     constructor(props){
         super(props); 
         this.state= {
-            buttonTitle:"Hello!"
+            buttonTitle:"Hello!",
+            buttonBool: true,
+            buttonColor: this.props.buttonColor,
         }
     }
 
@@ -16,8 +19,18 @@ export default class Car extends React.Component{
     // 2. Functional Code
 
     doSomething = () => {
-        console.log("green hello button was clicked")
-        this.setState({buttonTitle: "Clicked!"})
+        console.log(this.state.buttonBool)
+        if(this.state.buttonBool){
+            this.setState({buttonTitle: "Off!"})
+            this.setState({buttonColor: "grey"})
+            console.log("off")
+        } else {
+            this.setState({buttonTitle: "On!"})
+            this.setState({buttonColor: this.props.buttonColor})
+            console.log("on")
+        }
+        this.setState({buttonBool: !this.state.buttonBool})
+        console.log(this.state.buttonBool)
     }
 
     
@@ -28,7 +41,7 @@ export default class Car extends React.Component{
 
             <Text> Car Component</Text>
             <Button title={this.state.buttonTitle}
-             color="green"
+             color={this.state.buttonColor}
              onPress={this.doSomething}
              ></Button>
         </View>)

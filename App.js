@@ -12,7 +12,8 @@ export default function App() {
 {/* testnet-api.stellantis-oakland.com/cars/new */}
       <Text style={styles.text}>Welcome Stellantis Class of OU {stelVar}!</Text>
       {/* <Text style={styles.text2}>Component Text 2</Text> */}
-      <Car></Car>
+      <Car buttonColor="green"></Car>
+      <Car buttonColor="orange"></Car>
       <StatusBar style="auto" />
 
     </View>
