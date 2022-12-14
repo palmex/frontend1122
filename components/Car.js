@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, Button, View } from 'react-native';
 import React from "react";
 
 
@@ -20,7 +20,8 @@ export default class Car extends React.Component{
     render(){
         return(<View style={styles.container}>
 
-            <Text> This is the car component</Text>
+            <Text> Car Component</Text>
+            <Button title="Press Me!" color="green"></Button>
         </View>)
     }
 

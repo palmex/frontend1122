@@ -11,7 +11,7 @@ export default function App() {
     <View style={styles.container}>
 {/* testnet-api.stellantis-oakland.com/cars/new */}
       <Text style={styles.text}>Welcome Stellantis Class of OU {stelVar}!</Text>
-      <Text style={styles.text2}>Component Text 2</Text>
+      {/* <Text style={styles.text2}>Component Text 2</Text> */}
       <Car></Car>
       <StatusBar style="auto" />
 
