@@ -15,13 +15,22 @@ export default class Car extends React.Component{
 
     // 2. Functional Code
 
+    doSomething = () => {
+        console.log("green hello button was clicked")
+        this.setState({buttonTitle: "Clicked!"})
+    }
+
+    
 
     // 3. Part of code that is shown to user
     render(){
         return(<View style={styles.container}>
 
             <Text> Car Component</Text>
-            <Button title="Press Me!" color="green"></Button>
+            <Button title={this.state.buttonTitle}
+             color="green"
+             onPress={this.doSomething}
+             ></Button>
         </View>)
     }
 
