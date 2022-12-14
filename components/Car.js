@@ -16,6 +16,7 @@ export default class Car extends React.Component{
             year: "",
             odometer: ""
         }
+        this.createNewCar = this.createNewCar.bind(this);
     }
 
 
@@ -42,9 +43,16 @@ export default class Car extends React.Component{
         console.log("all cars: " , response)
     }
 
-    createNewCar = () => {
-        console.log("Car Component (internal) state: " , this.state)
-    
+    async createNewCar() {
+        let carDetailsBody = {
+            "make": this.state.make,
+            "model": this.state.model,
+            "year": this.state.year,
+            "odometer": this.state.odometer,
+        }
+        console.log("car details body " , carDetailsBody)
+        const response = await addNewCar(carDetailsBody)
+        console.log("created new car: " , response)
     }
 
     
@@ -110,6 +118,36 @@ async function fetchCars() {
         method: 'GET',
         withCredentials: true,
         headers: headers,
+    }).then(response => {
+        if(response.ok){
+            return response.json();
+        }
+        else {
+            var error = new Error('Error' + response.status + ":" + response.statusText)
+            error.response = response;
+            throw error; 
+        }
+    }, error=>{
+        var errmess = new Error(error.message);
+        throw errmess; 
+    })
+}
+
+async function addNewCar(carDetails) {
+
+    let headers = {
+        "Content-Type": "application/json",
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Headers': '*',
+        'Access-Control-Allow-Origin': 'http://localhost:3000/*',
+        'Accept': "application/json"
+    }
+
+    return fetch("http://localhost:3000/cars/new", {
+        method: 'POST',
+        withCredentials: true,
+        headers: headers,
+        body: JSON.stringify(carDetails)
     }).then(response => {
         if(response.ok){
             return response.json();
