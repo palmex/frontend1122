@@ -1,6 +1,5 @@
 import { StyleSheet, Text, TextInput, Button, View } from 'react-native';
 import React from "react";
-// import specialFucntion from anotherComponet
 
 
 export default class Car extends React.Component{
@@ -37,8 +36,15 @@ export default class Car extends React.Component{
         console.log(this.state.buttonBool)
     }
 
+
+    async componentDidMount(){
+        const response = await fetchCars()
+        console.log("all cars: " , response)
+    }
+
     createNewCar = () => {
         console.log("Car Component (internal) state: " , this.state)
+    
     }
 
     
@@ -47,7 +53,8 @@ export default class Car extends React.Component{
     render(){
         
 
-        return(<View style={styles.container}>
+        return(
+        <View style={styles.container}>
 
             <Text style={{fontSize: "25px"}}> Car Component</Text>
             {/* <Button title={this.state.buttonTitle}
@@ -78,13 +85,44 @@ export default class Car extends React.Component{
                  ></TextInput>
 
                  <Button title={"Submit"}
-             color={this.state.buttonColor}
-             onPress={this.createNewCar}
-             ></Button>
+                    color={this.state.buttonColor}
+                    onPress={this.createNewCar}
+                    ></Button>
              </View>
-        </View>)
+        </View>
+        )
     }
 
+}
+
+async function fetchCars() {
+
+    let headers = {
+        "Content-Type": "application/json",
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Headers': '*',
+        'Access-Control-Allow-Origin': 'http://localhost:3000/*',
+        'Accept': "application/json",
+        'admin': "true"
+    }
+
+    return fetch("http://localhost:3000/cars/all", {
+        method: 'GET',
+        withCredentials: true,
+        headers: headers,
+    }).then(response => {
+        if(response.ok){
+            return response.json();
+        }
+        else {
+            var error = new Error('Error' + response.status + ":" + response.statusText)
+            error.response = response;
+            throw error; 
+        }
+    }, error=>{
+        var errmess = new Error(error.message);
+        throw errmess; 
+    })
 }
 
 const styles = StyleSheet.create({
