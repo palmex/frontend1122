@@ -13,7 +13,7 @@ export default function App() {
       <Text style={styles.text}>Welcome Stellantis Class of OU {stelVar}!</Text>
       {/* <Text style={styles.text2}>Component Text 2</Text> */}
       <Car buttonColor="green"></Car>
-      <Car buttonColor="orange"></Car>
+      {/* <Car buttonColor="orange"></Car> */}
       <StatusBar style="auto" />
 
     </View>

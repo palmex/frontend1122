@@ -1,4 +1,4 @@
-import { StyleSheet, Text, Button, View } from 'react-native';
+import { StyleSheet, Text, TextInput, Button, View } from 'react-native';
 import React from "react";
 // import specialFucntion from anotherComponet
 
@@ -12,6 +12,7 @@ export default class Car extends React.Component{
             buttonTitle:"Hello!",
             buttonBool: true,
             buttonColor: this.props.buttonColor,
+            make: ""
         }
     }
 
@@ -33,17 +34,34 @@ export default class Car extends React.Component{
         console.log(this.state.buttonBool)
     }
 
-    
+    createNewCar = () => {}
 
+    
+    
     // 3. Part of code that is shown to user
     render(){
+        console.log("make state: " , this.state.make)
+
         return(<View style={styles.container}>
 
-            <Text> Car Component</Text>
-            <Button title={this.state.buttonTitle}
+            <Text style={{fontSize: "25px"}}> Car Component</Text>
+            {/* <Button title={this.state.buttonTitle}
              color={this.state.buttonColor}
              onPress={this.doSomething}
+             ></Button> */}
+             <View>
+                 <Text style={{fontSize: "17px"}}>Create New Car Form</Text>
+
+                <Text> Make </Text>
+                 <TextInput style={styles.input}
+                 onChangeText={(e) => this.setState({make: e})}
+                 ></TextInput>
+
+                 <Button title={"Submit"}
+             color={this.state.buttonColor}
+             onPress={this.createNewCar}
              ></Button>
+             </View>
         </View>)
     }
 
@@ -56,8 +74,13 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       justifyContent: 'center',
     },
-    button:{
-
+    input:{
+        borderColor: "#c7971e",
+        padding: "2%",
+        margin: "5%",
+        borderStyle: "solid",
+        borderRadius: "5%",
+        borderWidth: "1px",
     }
 })
 
