@@ -1,4 +1,4 @@
-import { StyleSheet, Text, TextInput, Button, View } from 'react-native';
+import { StyleSheet, Text, TextInput, Button, TouchableOpacity, View } from 'react-native';
 import React from "react";
 
 
@@ -14,7 +14,8 @@ export default class Car extends React.Component{
             make: "",
             model: "",
             year: "",
-            odometer: ""
+            odometer: "", 
+            data: []
         }
         this.createNewCar = this.createNewCar.bind(this);
     }
@@ -39,7 +40,9 @@ export default class Car extends React.Component{
 
 
     async componentDidMount(){
+
         const response = await fetchCars()
+        this.setState({data: response})
         console.log("all cars: " , response)
     }
 
@@ -54,8 +57,6 @@ export default class Car extends React.Component{
         const response = await addNewCar(carDetailsBody)
         console.log("created new car: " , response)
     }
-
-    
     
     // 3. Part of code that is shown to user
     render(){
@@ -96,6 +97,9 @@ export default class Car extends React.Component{
                     color={this.state.buttonColor}
                     onPress={this.createNewCar}
                     ></Button>
+             
+
+                {this.state.data.map((car)=> <TouchableOpacity  style={styles.touchable} key={car.car_id}>{car.make} {car.model} {car.year} with {car.odometer} miles.</TouchableOpacity>)}
              </View>
         </View>
         )
@@ -177,6 +181,15 @@ const styles = StyleSheet.create({
         borderStyle: "solid",
         borderRadius: "5%",
         borderWidth: "1px",
+    },
+    touchable: {
+        backgroundColor: "white", 
+        margin: "5%",
+        padding: "2%",
+        borderStyle: "solid",
+        borderRadius: "5%",
+        borderWidth: "1px",
+        borderColor: "blue"
     }
 })
 
